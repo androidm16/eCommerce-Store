@@ -4,37 +4,37 @@ let products = JSON.parse(localStorage.getItem("products"))
       {
         title: "The Alchemist",
         category: "Fiction",
-        price: 9.99,
+        price: 149.99,
         img: "https://bestlifeonline.com/wp-content/uploads/sites/3/2020/10/The-Alchemist-book-cover.jpg",
       },
       {
         title: "Learning To Silence The Mind",
         category: "Motivational",
-        price: 9.99,
+        price: 200.99,
         img: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1385071906l/18879598.jpg",
       },
       {
         title: "Their Eyes Were Watching God",
         category: "Drama Fiction",
-        price: 9.99,
+        price: 180.99,
         img: "https://media.takealot.com/covers_tsins/69659/cc266a6c6576a8616bde1aa92973716e-pdpxl.jpg",
       },
       {
         title: "Rule Of Four",
         category: "Fiction",
-        price: 9.99,
+        price: 203.99,
         img: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347646186l/18434.jpg",
       },
       {
         title: "Adultery",
         category: "Drama",
-        price: 9.99,
+        price: 157.99,
         img: "https://www.chicagotribune.com/resizer/KAqHVU2mouV8QtyRdue-HSIAnA8=/1200x0/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/I3EOJY56YJHMTHMSIV4EU3OP2Q.jpg",
       },
       {
         title: "Othello",
         category: "Drama Fiction",
-        price: 9.99,
+        price: 111.99,
         img: "https://images-na.ssl-images-amazon.com/images/I/71vx+-X-GQL.jpg",
       },
     ];
@@ -48,7 +48,7 @@ function readProducts(products) {
   products.forEach((product, position) => {
     document.querySelector("#products").innerHTML += `
       <div class="card">
-        <img src="${product.img}" class="card-img-top" alt="${product.title}">
+        <img src="${product.img}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">${product.title}</h5>
           <p class="card-text">R${product.price}</p>

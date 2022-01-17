@@ -15,8 +15,7 @@ function readCart(cart) {
 
   cart.forEach((cart, position) => {
       document.querySelector("#cart").innerHTML += `
-    <div class="card mb-3 w-100 position-relative" style="width:400px">
-    <button type="button" class="position-absolute top-0 start-100 translate-middle badge btn btn-danger" onclick="removeFromCart(${position})">X</button>
+    <div class="card mb-3 w-100 position-relative" style="width:400products
       <div class="row g-0">
         <div class="col-md-4">
           <img src="${cart.img}" class="card-img-top" alt="${cart.title}">
@@ -91,7 +90,7 @@ function deleteProduct(position) {
   function checkout() {
     let total = cart
       .reduce((total, product) => {
-        return total + cart.price * cart.qty;
+        return total + product.price * product.qty;
       }, 0)
       .toFixed(2);
     try {
