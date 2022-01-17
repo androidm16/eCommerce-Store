@@ -2,46 +2,45 @@ let products = JSON.parse(localStorage.getItem("products"))
   ? JSON.parse(localStorage.getItem("products"))
   : [
       {
-        title: "bananas",
-        category: "Fruit",
+        title: "The Alchemist",
+        category: "Fiction",
         price: 9.99,
-        img: "https://i.postimg.cc/FHrjH935/banana.jpg",
+        img: "https://bestlifeonline.com/wp-content/uploads/sites/3/2020/10/The-Alchemist-book-cover.jpg",
       },
       {
-        title: "apples",
-        category: "Fruit",
+        title: "Learning To Silence The Mind",
+        category: "Motivational",
         price: 9.99,
-        img: "https://i.postimg.cc/W4Kr8gKT/apple.jpg",
+        img: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1385071906l/18879598.jpg",
       },
       {
-        title: "peaches",
-        category: "Fruit",
+        title: "Their Eyes Were Watching God",
+        category: "Drama Fiction",
         price: 9.99,
-        img: "https://i.postimg.cc/Vv9CzTNk/peach.jpg",
+        img: "https://media.takealot.com/covers_tsins/69659/cc266a6c6576a8616bde1aa92973716e-pdpxl.jpg",
       },
       {
-        title: "grapes",
-        category: "Fruit",
+        title: "Rule Of Four",
+        category: "Fiction",
         price: 9.99,
-        img: "https://i.postimg.cc/SKw2Cq2K/grapes.jpg",
+        img: "https://i.gr-assets.com/images/S/compressed.photo.goodreads.com/books/1347646186l/18434.jpg",
       },
       {
-        title: "kiwi",
-        category: "Fruit",
+        title: "Adultery",
+        category: "Drama",
         price: 9.99,
-        img: "https://i.postimg.cc/43TbRzPP/Kiwi-Fruit.jpg",
+        img: "https://www.chicagotribune.com/resizer/KAqHVU2mouV8QtyRdue-HSIAnA8=/1200x0/top/arc-anglerfish-arc2-prod-tronc.s3.amazonaws.com/public/I3EOJY56YJHMTHMSIV4EU3OP2Q.jpg",
       },
       {
-        title: "oranges",
-        category: "Fruit",
+        title: "Othello",
+        category: "Drama Fiction",
         price: 9.99,
-        img: "https://i.postimg.cc/5NKQm8Dy/Oranges.jpg",
+        img: "https://images-na.ssl-images-amazon.com/images/I/71vx+-X-GQL.jpg",
       },
     ];
 
-let cart = JSON.parse(localStorage.getItem("cart"))
-  ? JSON.parse(localStorage.getItem("cart"))
-  : [];
+    let cart = JSON.parse(localStorage.getItem("cart"))
+  ? JSON.parse(localStorage.getItem("cart")) : [];
 
 // READ
 function readProducts(products) {
@@ -54,29 +53,24 @@ function readProducts(products) {
           <h5 class="card-title">${product.title}</h5>
           <p class="card-text">R${product.price}</p>
           <div class="d-flex mb-3">
-            <input type="number" class="form-control" value=1 min=1 id="addToCart${position}">
-            <button type="button" class="btn btn-secondary ms-3" onclick="addToCart(${position})"><i class="fas fa-cart-plus"></i></button>
-          </div>
-          
-          
-          
-          </div>
+          <input type="number" class="form-control" value=1 min=1 id="addToCart${position}">
+          <button type="button" class="btn btn-secondary ms-3" onclick="AddtoCart(${position})"><i class="fas fa-cart-plus"></i>
+            Add To Cart
+           </button>
+           </div>
+           </div>
           <div class="d-flex justify-content-end card-footer">
-            <button type="button" class="btn btn-primary w-50" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
-              Edit
-            </button>
-            <button type="button" class="btn btn-danger w-50 ms-3" onclick="deleteProduct(${position})" >
-              Delete
-            </button>
-          </div>
+          <button type="button" class="btn btn-primary w-50" data-bs-toggle="modal" data-bs-target="#editProduct${position}" >
+            Edit
+          </button>
+          <button type="button" class="btn btn-danger w-50 ms-3" onclick="deleteProduct(${position})" >
+            Delete
+          </button>
+        </div>
       </div>
 
-
-
-
-
-
-      <div
+           
+              <div
                 class="modal fade"
                 id="editProduct${position}"
                 tabindex="-1"
@@ -114,9 +108,9 @@ function readProducts(products) {
                           name="editCategory${position}"
                           id="editCategory${position}"
                         >
-                          <option value="Fruit">Fruit</option>
-                          <option value="Vegetables">Vegetables</option>
-                          <option value="Meat">Meat</option>
+                          <option value="Fiction">Fiction</option>
+                          <option value="Drama">Drama</option>
+                          <option value="Drama Fiction">Drama Fiction</option>
                         </select>
                       </div>
                       <div class="mb-3">
@@ -160,6 +154,8 @@ function readProducts(products) {
                   </div>
                 </div>
               </div>
+        </div>
+      </div>
     `;
   });
 }
@@ -224,80 +220,79 @@ function deleteProduct(position) {
   }
 }
 
-// ADD TO CART
-function addToCart(position) {
-  let qty = document.querySelector(`#addToCart${position}`).value;
-  let added = false;
-  cart.forEach((product) => {
-    if (product.title == products[position].title) {
+// Add to cart
+  function AddtoCart(position){
+    let qty = document.querySelector(`#addToCart${position}`).value;
+    let added = false;
+    cart.forEach((product) => {
+      if (product.title == products[position].title) {
+        alert(
+          `You have successfully added ${qty} ${products[position].title} to the cart`
+        );
+        product.qty = parseInt(product.qty) + parseInt(qty);
+        added = true;
+      }
+    });
+   
+    if (!added) {
+      cart.push({...products[position]});
       alert(
         `You have successfully added ${qty} ${products[position].title} to the cart`
       );
-      product.qty = parseInt(product.qty) + parseInt(qty);
-      added = true;
     }
-  });
-  if (!added) {
-    cart.push({ ...products[position], qty });
-    alert(
-      `You have successfully added ${qty} ${products[position].title} to the cart`
-    );
+  
+    showCartBadge();
+
+    localStorage.setItem("cart", JSON.stringify(cart));
   }
 
-  showCartBadge();
-
-  localStorage.setItem("cart", JSON.stringify(cart));
-}
-
-// Update Cart Badge
-function showCartBadge() {
-  document.querySelector("#badge").innerHTML = cart ? cart.length : "";
-}
-
-// SORT BY CATEGORY
-function sortCategory() {
-  let category = document.querySelector("#sortCategory").value;
-
-  if (category == "All") {
-    return readProducts(products);
+  // This will Update Cart Badge
+  function showCartBadge() {
+    document.querySelector("#badge").innerHTML = cart ? cart.length : "";
+  }
+  
+  // This sort's by Category
+  function sortCategory() {
+    let category = document.querySelector("#sortCategory").value;
+  
+    if (category == "All") {
+      return readProducts(products);
+    }
+  
+    let foundProducts = products.filter((product) => {
+      return product.category == category;
+    });
+  
+    readProducts(foundProducts);
+    console.log(foundProducts);
   }
 
-  let foundProducts = products.filter((product) => {
-    return product.category == category;
-  });
+  // This sort's by Name
+  function sortName() {
+    let direction = document.querySelector("#sortName").value;
+  
+    let sortedProducts = products.sort((a, b) => {
+      if (a.title.toLowerCase() < b.title.toLowerCase()) {
+        return -1;
+      }
+      if (a.title.toLowerCase() > b.title.toLowerCase()) {
+        return 1;
+      }
+      return 0;
+    });
+    if (direction == "descending") sortedProducts.reverse();
+    console.log(sortedProducts);
+    readProducts(products);
+  }
 
-  readProducts(foundProducts);
-  console.log(foundProducts);
-}
-
-// SORT BY NAME
-
-function sortName() {
-  let direction = document.querySelector("#sortName").value;
-
-  let sortedProducts = products.sort((a, b) => {
-    if (a.title.toLowerCase() < b.title.toLowerCase()) {
-      return -1;
-    }
-    if (a.title.toLowerCase() > b.title.toLowerCase()) {
-      return 1;
-    }
-    return 0;
-  });
-  if (direction == "descending") sortedProducts.reverse();
-  console.log(sortedProducts);
-  readProducts(products);
-}
-
-// SORT BY PRICE
-
-function sortPrice() {
-  let direction = document.querySelector("#sortPrice").value;
-
-  let sortedProducts = products.sort((a, b) => a.price - b.price);
-
-  console.log(sortedProducts);
-
-  if (direction == "descending") sortedProducts.reverse();
-  readProducts(sortedProducts);
-}
+  // This will sort items by Price
+  function sortPrice() {
+    let direction = document.querySelector("#sortPrice").value;
+  
+    let sortedProducts = products.sort((a, b) => a.price - b.price);
+  
+    console.log(sortedProducts);
+  
+    if (direction == "descending") sortedProducts.reverse();
+    readProducts(sortedProducts);
+  }
